@@ -1,3 +1,7 @@
+## Abstract
+
+Recently, I am looking for an apartment in Bay Area, but it proves the apartments 1b1b prices is skyrocket **HIGH!!!** Also, there are some luxury apartments that's out of rooms that I want. So, I develop this monitor to keep an eye on minimal prices as well as new apts released of these apartments.
+
 ## Ideas
 - run every 30 minutes
 - call floorplan endpoint of apartments to get the JSON availability data, 
@@ -10,6 +14,9 @@
 - multi-threading
 - HTTP request
 - send e-mail
+
+## Tech stacks:
+- Python
 
 
 
