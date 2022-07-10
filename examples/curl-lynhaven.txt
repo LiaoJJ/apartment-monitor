@@ -1,0 +1,20 @@
+curl 'https://livelynhaven.com/floorplans/' \
+  -H 'Accept: */*' \
+  -H 'Accept-Language: en-US,en;q=0.9,zh;q=0.8,zh-CN;q=0.7' \
+  -H 'Cache-Control: no-cache' \
+  -H 'Connection: keep-alive' \
+  -H 'Content-Type: application/x-www-form-urlencoded; charset=UTF-8' \
+  -H 'Cookie: JonahLead=eyJyZWZlcnJlciI6Imdvb2dsZS5jb20iLCJyZWZlcnJlcl91cmxfcXVlcnlzdHJpbmciOm51bGwsImN1cnJlbnRfdXJsX3F1ZXJ5c3RyaW5nIjoidXRtX3NvdXJjZT1Hb29nbGVMb2NhbExpc3RpbmcmdXRtX21lZGl1bT1vcmdhbmljIiwicHJvcGVydHlfaWRfaW5zdGFsbGVkIjp0cnVlfQ%3D%3D; _ga=GA1.2.734990397.1653022463; _gcl_au=1.1.234958425.1653022465; _bcvm_vrid_6492243747324932241=704983039204449172T0EFA77FC90715E2D85550AE8EEE51C3241C520187FBD3D4719481ABC33FD43897B9B18092DB30D9D78B922D3A9C176C951648D747FC0E7030117064D86CB39BD; OptanonAlertBoxClosed=2022-05-20T04:54:40.221Z; _gid=GA1.2.1109921102.1657044792; PHPSESSID=qgcieh4vds34d98cb08gjv5n05; jonah_popdown=1654116075; _bcvm_vid_6492243747324932241=705026839938161781T35B348BD922A5F4B7DB9E40A47FB70A7090D6CD45AFAAA1D8AB4CFAFBEF0596EDC30B26C00FF07B2579543BB1B75AED1589AD8A1B38A2F3B8D8CDE18D270F82B; _gat_gtag_UA_28486633_68=1; _gat_gtag_UA_167356068_1=1; OptanonConsent=isIABGlobal=false&datestamp=Sat+Jul+09+2022+18%3A57%3A49+GMT-0700+(Pacific+Daylight+Time)&version=6.9.0&hosts=&landingPath=NotLandingPage&groups=C0001%3A1%2CC0003%3A1%2CSPD_BG%3A1%2CC0002%3A1%2CC0004%3A1&geolocation=US%3BCA&AwaitingReconsent=false; bc_pv_end=' \
+  -H 'Origin: https://livelynhaven.com' \
+  -H 'Pragma: no-cache' \
+  -H 'Referer: https://livelynhaven.com/floorplans/' \
+  -H 'Sec-Fetch-Dest: empty' \
+  -H 'Sec-Fetch-Mode: cors' \
+  -H 'Sec-Fetch-Site: same-origin' \
+  -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36' \
+  -H 'X-Requested-With: XMLHttpRequest' \
+  -H 'sec-ch-ua: ".Not/A)Brand";v="99", "Google Chrome";v="103", "Chromium";v="103"' \
+  -H 'sec-ch-ua-mobile: ?0' \
+  -H 'sec-ch-ua-platform: "macOS"' \
+  --data-raw 'action=available-units&building=' \
+  --compressed
