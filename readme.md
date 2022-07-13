@@ -10,13 +10,16 @@ Recently, I am looking for an apartment in Bay Area, but it proves the apartment
 
 ## Techniques
 - Strategy pattern
+- Seperated logic
+  - JSON parse logic for different apts
+  - alert logic
 - Object oriented design
 - multi-threading
-- HTTP request
 - send e-mail
 
 ## Tech stacks:
 - Python
+- HTTP request
 
 
 

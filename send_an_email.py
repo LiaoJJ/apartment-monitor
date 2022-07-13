@@ -8,7 +8,7 @@ def send_email(subject, text, receiver):
 
     # Gmail Sign In
     gmail_sender = 'XXX@gmail.com'
-    gmail_passwd = 'XXX'
+    gmail_passwd = 'XX'
     try:
 
         server = smtplib.SMTP('smtp.gmail.com', 587)

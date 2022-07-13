@@ -7,10 +7,12 @@ from play_sound import play_sound
 from send_an_email import send_email
 
 # Configuration
+FranklinStreet_ALERT_PRICE = 3200
+MONTICELLO_ALERT_PRICE = 3300
 SCS_ALERT_PRICE = 3300
 LYNHAVEN_ALERT_PRICE = 3100
-EMAIL_ALERT_ADDRESS = "XXX@gmail.com"
-INTERVAL_TIME = 600
+EMAIL_ALERT_ADDRESS = "XXXX@gmail.com"
+INTERVAL_TIME = 1800
 
 # HTTP Setting
 scs_url = 'https://search.irvinecompanyapartments.com/multipleQueries'
@@ -52,11 +54,49 @@ lynhaven_headers = {'Accept': '*/*',
                     'sec-ch-ua-mobile': '?0',
                     'sec-ch-ua-platform': '"macOS"'}
 
+monticello_url = 'https://search.irvinecompanyapartments.com/multipleQueries'
+monticello_payload = '{"queries":[{"indexName":"prod_ica_unitAvailability_unitStartingPrice_asc","query":"","params":{"hitsPerPage":1,"attributesToHighlight":[],"filters":"(propertyCRMID:0x000000000000030f OR propertyCRMID:0x00000000000002df) AND floorplanUniqueID: 3969162_1","attributesToRetrieve":["floorplanName","unitMarketingName","featuredAmenity","floorplanUniqueID","floorplanCRMID","unitCRMID","unitTypeCode","propertyID","propertyAddress","buildingNumber","floorplanID","floorplanBath","floorplanBed","floorplanDeposit","unitID","unitFloor","unitSqFt","unitIsStudio","unitTypeName","unitAmenities","unitStartingPrice","unitEarliestAvailable","unitLeasePrice","unitConcessions","communityMarketingName","communityIDAEM","propertyZip","floorplanSqFt"]}},{"indexName":"prod_ica_unitAvailability_unitEarliestAvailable_asc","query":"","params":{"hitsPerPage":2,"attributesToHighlight":[],"filters":"(propertyCRMID:0x000000000000030f OR propertyCRMID:0x00000000000002df) AND floorplanUniqueID: 3969162_1","attributesToRetrieve":["floorplanName","unitMarketingName","featuredAmenity","floorplanUniqueID","floorplanCRMID","unitCRMID","unitTypeCode","propertyID","propertyAddress","buildingNumber","floorplanID","floorplanBath","floorplanBed","floorplanDeposit","unitID","unitFloor","unitSqFt","unitIsStudio","unitTypeName","unitAmenities","unitStartingPrice","unitEarliestAvailable","unitLeasePrice","unitConcessions","communityMarketingName","communityIDAEM","propertyZip","floorplanSqFt"]}},{"indexName":"prod_ica_unitAvailability","query":"","params":{"hitsPerPage":5,"attributesToHighlight":[],"filters":"(propertyCRMID:0x000000000000030f OR propertyCRMID:0x00000000000002df) AND floorplanUniqueID: 3969162_1","attributesToRetrieve":["floorplanName","unitMarketingName","featuredAmenity","floorplanUniqueID","floorplanCRMID","unitCRMID","unitTypeCode","propertyID","propertyAddress","buildingNumber","floorplanID","floorplanBath","floorplanBed","floorplanDeposit","unitID","unitFloor","unitSqFt","unitIsStudio","unitTypeName","unitAmenities","unitStartingPrice","unitEarliestAvailable","unitLeasePrice","unitConcessions","communityMarketingName","communityIDAEM","propertyZip","floorplanSqFt"]}},{"indexName":"prod_ica_unitAvailability_unitStartingPrice_asc","query":"","params":{"hitsPerPage":1,"attributesToHighlight":[],"filters":"(propertyCRMID:0x000000000000030f OR propertyCRMID:0x00000000000002df) AND unitTypeCode: 11C7","attributesToRetrieve":["floorplanName","unitMarketingName","featuredAmenity","floorplanUniqueID","floorplanCRMID","unitCRMID","unitTypeCode","propertyID","propertyAddress","buildingNumber","floorplanID","floorplanBath","floorplanBed","floorplanDeposit","unitID","unitFloor","unitSqFt","unitIsStudio","unitTypeName","unitAmenities","unitStartingPrice","unitEarliestAvailable","unitLeasePrice","unitConcessions","communityMarketingName","communityIDAEM","propertyZip","floorplanSqFt"]}},{"indexName":"prod_ica_unitAvailability_unitEarliestAvailable_asc","query":"","params":{"hitsPerPage":2,"attributesToHighlight":[],"filters":"(propertyCRMID:0x000000000000030f OR propertyCRMID:0x00000000000002df) AND unitTypeCode: 11C7","attributesToRetrieve":["floorplanName","unitMarketingName","featuredAmenity","floorplanUniqueID","floorplanCRMID","unitCRMID","unitTypeCode","propertyID","propertyAddress","buildingNumber","floorplanID","floorplanBath","floorplanBed","floorplanDeposit","unitID","unitFloor","unitSqFt","unitIsStudio","unitTypeName","unitAmenities","unitStartingPrice","unitEarliestAvailable","unitLeasePrice","unitConcessions","communityMarketingName","communityIDAEM","propertyZip","floorplanSqFt"]}},{"indexName":"prod_ica_unitAvailability","query":"","params":{"hitsPerPage":5,"attributesToHighlight":[],"filters":"(propertyCRMID:0x000000000000030f OR propertyCRMID:0x00000000000002df) AND unitTypeCode: 11C7","attributesToRetrieve":["floorplanName","unitMarketingName","featuredAmenity","floorplanUniqueID","floorplanCRMID","unitCRMID","unitTypeCode","propertyID","propertyAddress","buildingNumber","floorplanID","floorplanBath","floorplanBed","floorplanDeposit","unitID","unitFloor","unitSqFt","unitIsStudio","unitTypeName","unitAmenities","unitStartingPrice","unitEarliestAvailable","unitLeasePrice","unitConcessions","communityMarketingName","communityIDAEM","propertyZip","floorplanSqFt"]}},{"indexName":"prod_ica_unitAvailability_unitStartingPrice_asc","query":"","params":{"hitsPerPage":1,"attributesToHighlight":[],"filters":"(propertyCRMID:0x000000000000030f OR propertyCRMID:0x00000000000002df) AND unitTypeCode: 11C12","attributesToRetrieve":["floorplanName","unitMarketingName","featuredAmenity","floorplanUniqueID","floorplanCRMID","unitCRMID","unitTypeCode","propertyID","propertyAddress","buildingNumber","floorplanID","floorplanBath","floorplanBed","floorplanDeposit","unitID","unitFloor","unitSqFt","unitIsStudio","unitTypeName","unitAmenities","unitStartingPrice","unitEarliestAvailable","unitLeasePrice","unitConcessions","communityMarketingName","communityIDAEM","propertyZip","floorplanSqFt"]}},{"indexName":"prod_ica_unitAvailability_unitEarliestAvailable_asc","query":"","params":{"hitsPerPage":2,"attributesToHighlight":[],"filters":"(propertyCRMID:0x000000000000030f OR propertyCRMID:0x00000000000002df) AND unitTypeCode: 11C12","attributesToRetrieve":["floorplanName","unitMarketingName","featuredAmenity","floorplanUniqueID","floorplanCRMID","unitCRMID","unitTypeCode","propertyID","propertyAddress","buildingNumber","floorplanID","floorplanBath","floorplanBed","floorplanDeposit","unitID","unitFloor","unitSqFt","unitIsStudio","unitTypeName","unitAmenities","unitStartingPrice","unitEarliestAvailable","unitLeasePrice","unitConcessions","communityMarketingName","communityIDAEM","propertyZip","floorplanSqFt"]}},{"indexName":"prod_ica_unitAvailability","query":"","params":{"hitsPerPage":5,"attributesToHighlight":[],"filters":"(propertyCRMID:0x000000000000030f OR propertyCRMID:0x00000000000002df) AND unitTypeCode: 11C12","attributesToRetrieve":["floorplanName","unitMarketingName","featuredAmenity","floorplanUniqueID","floorplanCRMID","unitCRMID","unitTypeCode","propertyID","propertyAddress","buildingNumber","floorplanID","floorplanBath","floorplanBed","floorplanDeposit","unitID","unitFloor","unitSqFt","unitIsStudio","unitTypeName","unitAmenities","unitStartingPrice","unitEarliestAvailable","unitLeasePrice","unitConcessions","communityMarketingName","communityIDAEM","propertyZip","floorplanSqFt"]}},{"indexName":"prod_ica_unitAvailability_unitStartingPrice_asc","query":"","params":{"hitsPerPage":1,"attributesToHighlight":[],"filters":"(propertyCRMID:0x000000000000030f OR propertyCRMID:0x00000000000002df) AND (unitTypeCode:11C16D OR unitTypeCode:11C16)","attributesToRetrieve":["floorplanName","unitMarketingName","featuredAmenity","floorplanUniqueID","floorplanCRMID","unitCRMID","unitTypeCode","propertyID","propertyAddress","buildingNumber","floorplanID","floorplanBath","floorplanBed","floorplanDeposit","unitID","unitFloor","unitSqFt","unitIsStudio","unitTypeName","unitAmenities","unitStartingPrice","unitEarliestAvailable","unitLeasePrice","unitConcessions","communityMarketingName","communityIDAEM","propertyZip","floorplanSqFt"]}},{"indexName":"prod_ica_unitAvailability_unitEarliestAvailable_asc","query":"","params":{"hitsPerPage":2,"attributesToHighlight":[],"filters":"(propertyCRMID:0x000000000000030f OR propertyCRMID:0x00000000000002df) AND (unitTypeCode:11C16D OR unitTypeCode:11C16)","attributesToRetrieve":["floorplanName","unitMarketingName","featuredAmenity","floorplanUniqueID","floorplanCRMID","unitCRMID","unitTypeCode","propertyID","propertyAddress","buildingNumber","floorplanID","floorplanBath","floorplanBed","floorplanDeposit","unitID","unitFloor","unitSqFt","unitIsStudio","unitTypeName","unitAmenities","unitStartingPrice","unitEarliestAvailable","unitLeasePrice","unitConcessions","communityMarketingName","communityIDAEM","propertyZip","floorplanSqFt"]}},{"indexName":"prod_ica_unitAvailability","query":"","params":{"hitsPerPage":5,"attributesToHighlight":[],"filters":"(propertyCRMID:0x000000000000030f OR propertyCRMID:0x00000000000002df) AND (unitTypeCode:11C16D OR unitTypeCode:11C16)","attributesToRetrieve":["floorplanName","unitMarketingName","featuredAmenity","floorplanUniqueID","floorplanCRMID","unitCRMID","unitTypeCode","propertyID","propertyAddress","buildingNumber","floorplanID","floorplanBath","floorplanBed","floorplanDeposit","unitID","unitFloor","unitSqFt","unitIsStudio","unitTypeName","unitAmenities","unitStartingPrice","unitEarliestAvailable","unitLeasePrice","unitConcessions","communityMarketingName","communityIDAEM","propertyZip","floorplanSqFt"]}},{"indexName":"prod_ica_unitAvailability_unitStartingPrice_asc","query":"","params":{"hitsPerPage":1,"attributesToHighlight":[],"filters":"(propertyCRMID:0x000000000000030f OR propertyCRMID:0x00000000000002df) AND unitTypeCode: 22C18","attributesToRetrieve":["floorplanName","unitMarketingName","featuredAmenity","floorplanUniqueID","floorplanCRMID","unitCRMID","unitTypeCode","propertyID","propertyAddress","buildingNumber","floorplanID","floorplanBath","floorplanBed","floorplanDeposit","unitID","unitFloor","unitSqFt","unitIsStudio","unitTypeName","unitAmenities","unitStartingPrice","unitEarliestAvailable","unitLeasePrice","unitConcessions","communityMarketingName","communityIDAEM","propertyZip","floorplanSqFt"]}},{"indexName":"prod_ica_unitAvailability_unitEarliestAvailable_asc","query":"","params":{"hitsPerPage":2,"attributesToHighlight":[],"filters":"(propertyCRMID:0x000000000000030f OR propertyCRMID:0x00000000000002df) AND unitTypeCode: 22C18","attributesToRetrieve":["floorplanName","unitMarketingName","featuredAmenity","floorplanUniqueID","floorplanCRMID","unitCRMID","unitTypeCode","propertyID","propertyAddress","buildingNumber","floorplanID","floorplanBath","floorplanBed","floorplanDeposit","unitID","unitFloor","unitSqFt","unitIsStudio","unitTypeName","unitAmenities","unitStartingPrice","unitEarliestAvailable","unitLeasePrice","unitConcessions","communityMarketingName","communityIDAEM","propertyZip","floorplanSqFt"]}},{"indexName":"prod_ica_unitAvailability","query":"","params":{"hitsPerPage":5,"attributesToHighlight":[],"filters":"(propertyCRMID:0x000000000000030f OR propertyCRMID:0x00000000000002df) AND unitTypeCode: 22C18","attributesToRetrieve":["floorplanName","unitMarketingName","featuredAmenity","floorplanUniqueID","floorplanCRMID","unitCRMID","unitTypeCode","propertyID","propertyAddress","buildingNumber","floorplanID","floorplanBath","floorplanBed","floorplanDeposit","unitID","unitFloor","unitSqFt","unitIsStudio","unitTypeName","unitAmenities","unitStartingPrice","unitEarliestAvailable","unitLeasePrice","unitConcessions","communityMarketingName","communityIDAEM","propertyZip","floorplanSqFt"]}},{"indexName":"prod_ica_unitAvailability_unitStartingPrice_asc","query":"","params":{"hitsPerPage":1,"attributesToHighlight":[],"filters":"(propertyCRMID:0x000000000000030f OR propertyCRMID:0x00000000000002df) AND unitTypeCode: 22C19","attributesToRetrieve":["floorplanName","unitMarketingName","featuredAmenity","floorplanUniqueID","floorplanCRMID","unitCRMID","unitTypeCode","propertyID","propertyAddress","buildingNumber","floorplanID","floorplanBath","floorplanBed","floorplanDeposit","unitID","unitFloor","unitSqFt","unitIsStudio","unitTypeName","unitAmenities","unitStartingPrice","unitEarliestAvailable","unitLeasePrice","unitConcessions","communityMarketingName","communityIDAEM","propertyZip","floorplanSqFt"]}},{"indexName":"prod_ica_unitAvailability_unitEarliestAvailable_asc","query":"","params":{"hitsPerPage":2,"attributesToHighlight":[],"filters":"(propertyCRMID:0x000000000000030f OR propertyCRMID:0x00000000000002df) AND unitTypeCode: 22C19","attributesToRetrieve":["floorplanName","unitMarketingName","featuredAmenity","floorplanUniqueID","floorplanCRMID","unitCRMID","unitTypeCode","propertyID","propertyAddress","buildingNumber","floorplanID","floorplanBath","floorplanBed","floorplanDeposit","unitID","unitFloor","unitSqFt","unitIsStudio","unitTypeName","unitAmenities","unitStartingPrice","unitEarliestAvailable","unitLeasePrice","unitConcessions","communityMarketingName","communityIDAEM","propertyZip","floorplanSqFt"]}},{"indexName":"prod_ica_unitAvailability","query":"","params":{"hitsPerPage":5,"attributesToHighlight":[],"filters":"(propertyCRMID:0x000000000000030f OR propertyCRMID:0x00000000000002df) AND unitTypeCode: 22C19","attributesToRetrieve":["floorplanName","unitMarketingName","featuredAmenity","floorplanUniqueID","floorplanCRMID","unitCRMID","unitTypeCode","propertyID","propertyAddress","buildingNumber","floorplanID","floorplanBath","floorplanBed","floorplanDeposit","unitID","unitFloor","unitSqFt","unitIsStudio","unitTypeName","unitAmenities","unitStartingPrice","unitEarliestAvailable","unitLeasePrice","unitConcessions","communityMarketingName","communityIDAEM","propertyZip","floorplanSqFt"]}},{"indexName":"prod_ica_unitAvailability_unitStartingPrice_asc","query":"","params":{"hitsPerPage":1,"attributesToHighlight":[],"filters":"(propertyCRMID:0x000000000000030f OR propertyCRMID:0x00000000000002df) AND floorplanUniqueID: 3969162_19","attributesToRetrieve":["floorplanName","unitMarketingName","featuredAmenity","floorplanUniqueID","floorplanCRMID","unitCRMID","unitTypeCode","propertyID","propertyAddress","buildingNumber","floorplanID","floorplanBath","floorplanBed","floorplanDeposit","unitID","unitFloor","unitSqFt","unitIsStudio","unitTypeName","unitAmenities","unitStartingPrice","unitEarliestAvailable","unitLeasePrice","unitConcessions","communityMarketingName","communityIDAEM","propertyZip","floorplanSqFt"]}},{"indexName":"prod_ica_unitAvailability_unitEarliestAvailable_asc","query":"","params":{"hitsPerPage":2,"attributesToHighlight":[],"filters":"(propertyCRMID:0x000000000000030f OR propertyCRMID:0x00000000000002df) AND floorplanUniqueID: 3969162_19","attributesToRetrieve":["floorplanName","unitMarketingName","featuredAmenity","floorplanUniqueID","floorplanCRMID","unitCRMID","unitTypeCode","propertyID","propertyAddress","buildingNumber","floorplanID","floorplanBath","floorplanBed","floorplanDeposit","unitID","unitFloor","unitSqFt","unitIsStudio","unitTypeName","unitAmenities","unitStartingPrice","unitEarliestAvailable","unitLeasePrice","unitConcessions","communityMarketingName","communityIDAEM","propertyZip","floorplanSqFt"]}},{"indexName":"prod_ica_unitAvailability","query":"","params":{"hitsPerPage":5,"attributesToHighlight":[],"filters":"(propertyCRMID:0x000000000000030f OR propertyCRMID:0x00000000000002df) AND floorplanUniqueID: 3969162_19","attributesToRetrieve":["floorplanName","unitMarketingName","featuredAmenity","floorplanUniqueID","floorplanCRMID","unitCRMID","unitTypeCode","propertyID","propertyAddress","buildingNumber","floorplanID","floorplanBath","floorplanBed","floorplanDeposit","unitID","unitFloor","unitSqFt","unitIsStudio","unitTypeName","unitAmenities","unitStartingPrice","unitEarliestAvailable","unitLeasePrice","unitConcessions","communityMarketingName","communityIDAEM","propertyZip","floorplanSqFt"]}},{"indexName":"prod_ica_unitAvailability_unitStartingPrice_asc","query":"","params":{"hitsPerPage":1,"attributesToHighlight":[],"filters":"(propertyCRMID:0x000000000000030f OR propertyCRMID:0x00000000000002df) AND unitTypeCode: 22C27","attributesToRetrieve":["floorplanName","unitMarketingName","featuredAmenity","floorplanUniqueID","floorplanCRMID","unitCRMID","unitTypeCode","propertyID","propertyAddress","buildingNumber","floorplanID","floorplanBath","floorplanBed","floorplanDeposit","unitID","unitFloor","unitSqFt","unitIsStudio","unitTypeName","unitAmenities","unitStartingPrice","unitEarliestAvailable","unitLeasePrice","unitConcessions","communityMarketingName","communityIDAEM","propertyZip","floorplanSqFt"]}},{"indexName":"prod_ica_unitAvailability_unitEarliestAvailable_asc","query":"","params":{"hitsPerPage":2,"attributesToHighlight":[],"filters":"(propertyCRMID:0x000000000000030f OR propertyCRMID:0x00000000000002df) AND unitTypeCode: 22C27","attributesToRetrieve":["floorplanName","unitMarketingName","featuredAmenity","floorplanUniqueID","floorplanCRMID","unitCRMID","unitTypeCode","propertyID","propertyAddress","buildingNumber","floorplanID","floorplanBath","floorplanBed","floorplanDeposit","unitID","unitFloor","unitSqFt","unitIsStudio","unitTypeName","unitAmenities","unitStartingPrice","unitEarliestAvailable","unitLeasePrice","unitConcessions","communityMarketingName","communityIDAEM","propertyZip","floorplanSqFt"]}},{"indexName":"prod_ica_unitAvailability","query":"","params":{"hitsPerPage":5,"attributesToHighlight":[],"filters":"(propertyCRMID:0x000000000000030f OR propertyCRMID:0x00000000000002df) AND unitTypeCode: 22C27","attributesToRetrieve":["floorplanName","unitMarketingName","featuredAmenity","floorplanUniqueID","floorplanCRMID","unitCRMID","unitTypeCode","propertyID","propertyAddress","buildingNumber","floorplanID","floorplanBath","floorplanBed","floorplanDeposit","unitID","unitFloor","unitSqFt","unitIsStudio","unitTypeName","unitAmenities","unitStartingPrice","unitEarliestAvailable","unitLeasePrice","unitConcessions","communityMarketingName","communityIDAEM","propertyZip","floorplanSqFt"]}},{"indexName":"prod_ica_unitAvailability_unitStartingPrice_asc","query":"","params":{"hitsPerPage":1,"attributesToHighlight":[],"filters":"(propertyCRMID:0x000000000000030f OR propertyCRMID:0x00000000000002df) AND (unitTypeCode:22C29D OR unitTypeCode:22C29)","attributesToRetrieve":["floorplanName","unitMarketingName","featuredAmenity","floorplanUniqueID","floorplanCRMID","unitCRMID","unitTypeCode","propertyID","propertyAddress","buildingNumber","floorplanID","floorplanBath","floorplanBed","floorplanDeposit","unitID","unitFloor","unitSqFt","unitIsStudio","unitTypeName","unitAmenities","unitStartingPrice","unitEarliestAvailable","unitLeasePrice","unitConcessions","communityMarketingName","communityIDAEM","propertyZip","floorplanSqFt"]}},{"indexName":"prod_ica_unitAvailability_unitEarliestAvailable_asc","query":"","params":{"hitsPerPage":2,"attributesToHighlight":[],"filters":"(propertyCRMID:0x000000000000030f OR propertyCRMID:0x00000000000002df) AND (unitTypeCode:22C29D OR unitTypeCode:22C29)","attributesToRetrieve":["floorplanName","unitMarketingName","featuredAmenity","floorplanUniqueID","floorplanCRMID","unitCRMID","unitTypeCode","propertyID","propertyAddress","buildingNumber","floorplanID","floorplanBath","floorplanBed","floorplanDeposit","unitID","unitFloor","unitSqFt","unitIsStudio","unitTypeName","unitAmenities","unitStartingPrice","unitEarliestAvailable","unitLeasePrice","unitConcessions","communityMarketingName","communityIDAEM","propertyZip","floorplanSqFt"]}},{"indexName":"prod_ica_unitAvailability","query":"","params":{"hitsPerPage":5,"attributesToHighlight":[],"filters":"(propertyCRMID:0x000000000000030f OR propertyCRMID:0x00000000000002df) AND (unitTypeCode:22C29D OR unitTypeCode:22C29)","attributesToRetrieve":["floorplanName","unitMarketingName","featuredAmenity","floorplanUniqueID","floorplanCRMID","unitCRMID","unitTypeCode","propertyID","propertyAddress","buildingNumber","floorplanID","floorplanBath","floorplanBed","floorplanDeposit","unitID","unitFloor","unitSqFt","unitIsStudio","unitTypeName","unitAmenities","unitStartingPrice","unitEarliestAvailable","unitLeasePrice","unitConcessions","communityMarketingName","communityIDAEM","propertyZip","floorplanSqFt"]}}]}'
+monticello_headers = {'authority': 'search.irvinecompanyapartments.com',
+                      'accept': 'application/json, text/plain, */*',
+                      'accept-language': 'en-US,en;q=0.9,zh;q=0.8,zh-CN;q=0.7',
+                      'cache-control': 'no-cache',
+                      'content-type': 'application/json;charset=UTF-8',
+                      'origin': 'https://www.irvinecompanyapartments.com',
+                      'pragma': 'no-cache',
+                      'referer': 'https://www.irvinecompanyapartments.com/',
+                      'sec-ch-ua': '".Not/A)Brand";v="99", "Google Chrome";v="103", "Chromium";v="103"',
+                      'sec-ch-ua-mobile': '?0',
+                      'sec-ch-ua-platform': '"macOS"',
+                      'sec-fetch-dest': 'empty',
+                      'sec-fetch-mode': 'cors',
+                      'sec-fetch-site': 'same-site',
+                      'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36',
+                      'x-referer': 'https://www.irvinecompanyapartments.com/locations/northern-california/santa-clara/monticello/availability.html'}
+
+franklinStreet_url = 'https://search.irvinecompanyapartments.com/multipleQueries'
+franklinStreet_payload = '{"queries":[{"indexName":"prod_ica_unitAvailability_unitStartingPrice_asc","query":"","params":{"hitsPerPage":1,"attributesToHighlight":[],"filters":"(propertyCRMID:0x0000000000000048) AND floorplanUniqueID: 1078195_11","attributesToRetrieve":["floorplanName","unitMarketingName","featuredAmenity","floorplanUniqueID","floorplanCRMID","unitCRMID","unitTypeCode","propertyID","propertyAddress","buildingNumber","floorplanID","floorplanBath","floorplanBed","floorplanDeposit","unitID","unitFloor","unitSqFt","unitIsStudio","unitTypeName","unitAmenities","unitStartingPrice","unitEarliestAvailable","unitLeasePrice","unitConcessions","communityMarketingName","communityIDAEM","propertyZip","floorplanSqFt"]}},{"indexName":"prod_ica_unitAvailability_unitEarliestAvailable_asc","query":"","params":{"hitsPerPage":2,"attributesToHighlight":[],"filters":"(propertyCRMID:0x0000000000000048) AND floorplanUniqueID: 1078195_11","attributesToRetrieve":["floorplanName","unitMarketingName","featuredAmenity","floorplanUniqueID","floorplanCRMID","unitCRMID","unitTypeCode","propertyID","propertyAddress","buildingNumber","floorplanID","floorplanBath","floorplanBed","floorplanDeposit","unitID","unitFloor","unitSqFt","unitIsStudio","unitTypeName","unitAmenities","unitStartingPrice","unitEarliestAvailable","unitLeasePrice","unitConcessions","communityMarketingName","communityIDAEM","propertyZip","floorplanSqFt"]}},{"indexName":"prod_ica_unitAvailability","query":"","params":{"hitsPerPage":5,"attributesToHighlight":[],"filters":"(propertyCRMID:0x0000000000000048) AND floorplanUniqueID: 1078195_11","attributesToRetrieve":["floorplanName","unitMarketingName","featuredAmenity","floorplanUniqueID","floorplanCRMID","unitCRMID","unitTypeCode","propertyID","propertyAddress","buildingNumber","floorplanID","floorplanBath","floorplanBed","floorplanDeposit","unitID","unitFloor","unitSqFt","unitIsStudio","unitTypeName","unitAmenities","unitStartingPrice","unitEarliestAvailable","unitLeasePrice","unitConcessions","communityMarketingName","communityIDAEM","propertyZip","floorplanSqFt"]}},{"indexName":"prod_ica_unitAvailability_unitStartingPrice_asc","query":"","params":{"hitsPerPage":1,"attributesToHighlight":[],"filters":"(propertyCRMID:0x0000000000000048) AND floorplanUniqueID: 1078195_12","attributesToRetrieve":["floorplanName","unitMarketingName","featuredAmenity","floorplanUniqueID","floorplanCRMID","unitCRMID","unitTypeCode","propertyID","propertyAddress","buildingNumber","floorplanID","floorplanBath","floorplanBed","floorplanDeposit","unitID","unitFloor","unitSqFt","unitIsStudio","unitTypeName","unitAmenities","unitStartingPrice","unitEarliestAvailable","unitLeasePrice","unitConcessions","communityMarketingName","communityIDAEM","propertyZip","floorplanSqFt"]}},{"indexName":"prod_ica_unitAvailability_unitEarliestAvailable_asc","query":"","params":{"hitsPerPage":2,"attributesToHighlight":[],"filters":"(propertyCRMID:0x0000000000000048) AND floorplanUniqueID: 1078195_12","attributesToRetrieve":["floorplanName","unitMarketingName","featuredAmenity","floorplanUniqueID","floorplanCRMID","unitCRMID","unitTypeCode","propertyID","propertyAddress","buildingNumber","floorplanID","floorplanBath","floorplanBed","floorplanDeposit","unitID","unitFloor","unitSqFt","unitIsStudio","unitTypeName","unitAmenities","unitStartingPrice","unitEarliestAvailable","unitLeasePrice","unitConcessions","communityMarketingName","communityIDAEM","propertyZip","floorplanSqFt"]}},{"indexName":"prod_ica_unitAvailability","query":"","params":{"hitsPerPage":5,"attributesToHighlight":[],"filters":"(propertyCRMID:0x0000000000000048) AND floorplanUniqueID: 1078195_12","attributesToRetrieve":["floorplanName","unitMarketingName","featuredAmenity","floorplanUniqueID","floorplanCRMID","unitCRMID","unitTypeCode","propertyID","propertyAddress","buildingNumber","floorplanID","floorplanBath","floorplanBed","floorplanDeposit","unitID","unitFloor","unitSqFt","unitIsStudio","unitTypeName","unitAmenities","unitStartingPrice","unitEarliestAvailable","unitLeasePrice","unitConcessions","communityMarketingName","communityIDAEM","propertyZip","floorplanSqFt"]}},{"indexName":"prod_ica_unitAvailability_unitStartingPrice_asc","query":"","params":{"hitsPerPage":1,"attributesToHighlight":[],"filters":"(propertyCRMID:0x0000000000000048) AND floorplanUniqueID: 1078195_17","attributesToRetrieve":["floorplanName","unitMarketingName","featuredAmenity","floorplanUniqueID","floorplanCRMID","unitCRMID","unitTypeCode","propertyID","propertyAddress","buildingNumber","floorplanID","floorplanBath","floorplanBed","floorplanDeposit","unitID","unitFloor","unitSqFt","unitIsStudio","unitTypeName","unitAmenities","unitStartingPrice","unitEarliestAvailable","unitLeasePrice","unitConcessions","communityMarketingName","communityIDAEM","propertyZip","floorplanSqFt"]}},{"indexName":"prod_ica_unitAvailability_unitEarliestAvailable_asc","query":"","params":{"hitsPerPage":2,"attributesToHighlight":[],"filters":"(propertyCRMID:0x0000000000000048) AND floorplanUniqueID: 1078195_17","attributesToRetrieve":["floorplanName","unitMarketingName","featuredAmenity","floorplanUniqueID","floorplanCRMID","unitCRMID","unitTypeCode","propertyID","propertyAddress","buildingNumber","floorplanID","floorplanBath","floorplanBed","floorplanDeposit","unitID","unitFloor","unitSqFt","unitIsStudio","unitTypeName","unitAmenities","unitStartingPrice","unitEarliestAvailable","unitLeasePrice","unitConcessions","communityMarketingName","communityIDAEM","propertyZip","floorplanSqFt"]}},{"indexName":"prod_ica_unitAvailability","query":"","params":{"hitsPerPage":5,"attributesToHighlight":[],"filters":"(propertyCRMID:0x0000000000000048) AND floorplanUniqueID: 1078195_17","attributesToRetrieve":["floorplanName","unitMarketingName","featuredAmenity","floorplanUniqueID","floorplanCRMID","unitCRMID","unitTypeCode","propertyID","propertyAddress","buildingNumber","floorplanID","floorplanBath","floorplanBed","floorplanDeposit","unitID","unitFloor","unitSqFt","unitIsStudio","unitTypeName","unitAmenities","unitStartingPrice","unitEarliestAvailable","unitLeasePrice","unitConcessions","communityMarketingName","communityIDAEM","propertyZip","floorplanSqFt"]}},{"indexName":"prod_ica_unitAvailability_unitStartingPrice_asc","query":"","params":{"hitsPerPage":1,"attributesToHighlight":[],"filters":"(propertyCRMID:0x0000000000000048) AND floorplanUniqueID: 1078195_19","attributesToRetrieve":["floorplanName","unitMarketingName","featuredAmenity","floorplanUniqueID","floorplanCRMID","unitCRMID","unitTypeCode","propertyID","propertyAddress","buildingNumber","floorplanID","floorplanBath","floorplanBed","floorplanDeposit","unitID","unitFloor","unitSqFt","unitIsStudio","unitTypeName","unitAmenities","unitStartingPrice","unitEarliestAvailable","unitLeasePrice","unitConcessions","communityMarketingName","communityIDAEM","propertyZip","floorplanSqFt"]}},{"indexName":"prod_ica_unitAvailability_unitEarliestAvailable_asc","query":"","params":{"hitsPerPage":2,"attributesToHighlight":[],"filters":"(propertyCRMID:0x0000000000000048) AND floorplanUniqueID: 1078195_19","attributesToRetrieve":["floorplanName","unitMarketingName","featuredAmenity","floorplanUniqueID","floorplanCRMID","unitCRMID","unitTypeCode","propertyID","propertyAddress","buildingNumber","floorplanID","floorplanBath","floorplanBed","floorplanDeposit","unitID","unitFloor","unitSqFt","unitIsStudio","unitTypeName","unitAmenities","unitStartingPrice","unitEarliestAvailable","unitLeasePrice","unitConcessions","communityMarketingName","communityIDAEM","propertyZip","floorplanSqFt"]}},{"indexName":"prod_ica_unitAvailability","query":"","params":{"hitsPerPage":5,"attributesToHighlight":[],"filters":"(propertyCRMID:0x0000000000000048) AND floorplanUniqueID: 1078195_19","attributesToRetrieve":["floorplanName","unitMarketingName","featuredAmenity","floorplanUniqueID","floorplanCRMID","unitCRMID","unitTypeCode","propertyID","propertyAddress","buildingNumber","floorplanID","floorplanBath","floorplanBed","floorplanDeposit","unitID","unitFloor","unitSqFt","unitIsStudio","unitTypeName","unitAmenities","unitStartingPrice","unitEarliestAvailable","unitLeasePrice","unitConcessions","communityMarketingName","communityIDAEM","propertyZip","floorplanSqFt"]}},{"indexName":"prod_ica_unitAvailability_unitStartingPrice_asc","query":"","params":{"hitsPerPage":1,"attributesToHighlight":[],"filters":"(propertyCRMID:0x0000000000000048) AND floorplanUniqueID: 1078195_20","attributesToRetrieve":["floorplanName","unitMarketingName","featuredAmenity","floorplanUniqueID","floorplanCRMID","unitCRMID","unitTypeCode","propertyID","propertyAddress","buildingNumber","floorplanID","floorplanBath","floorplanBed","floorplanDeposit","unitID","unitFloor","unitSqFt","unitIsStudio","unitTypeName","unitAmenities","unitStartingPrice","unitEarliestAvailable","unitLeasePrice","unitConcessions","communityMarketingName","communityIDAEM","propertyZip","floorplanSqFt"]}},{"indexName":"prod_ica_unitAvailability_unitEarliestAvailable_asc","query":"","params":{"hitsPerPage":2,"attributesToHighlight":[],"filters":"(propertyCRMID:0x0000000000000048) AND floorplanUniqueID: 1078195_20","attributesToRetrieve":["floorplanName","unitMarketingName","featuredAmenity","floorplanUniqueID","floorplanCRMID","unitCRMID","unitTypeCode","propertyID","propertyAddress","buildingNumber","floorplanID","floorplanBath","floorplanBed","floorplanDeposit","unitID","unitFloor","unitSqFt","unitIsStudio","unitTypeName","unitAmenities","unitStartingPrice","unitEarliestAvailable","unitLeasePrice","unitConcessions","communityMarketingName","communityIDAEM","propertyZip","floorplanSqFt"]}},{"indexName":"prod_ica_unitAvailability","query":"","params":{"hitsPerPage":5,"attributesToHighlight":[],"filters":"(propertyCRMID:0x0000000000000048) AND floorplanUniqueID: 1078195_20","attributesToRetrieve":["floorplanName","unitMarketingName","featuredAmenity","floorplanUniqueID","floorplanCRMID","unitCRMID","unitTypeCode","propertyID","propertyAddress","buildingNumber","floorplanID","floorplanBath","floorplanBed","floorplanDeposit","unitID","unitFloor","unitSqFt","unitIsStudio","unitTypeName","unitAmenities","unitStartingPrice","unitEarliestAvailable","unitLeasePrice","unitConcessions","communityMarketingName","communityIDAEM","propertyZip","floorplanSqFt"]}}]}'
+franklinStreet_headers = {   'authority': 'search.irvinecompanyapartments.com',
+   'accept': 'application/json, text/plain, */*',
+   'accept-language': 'en-US,en;q=0.9,zh;q=0.8,zh-CN;q=0.7',
+   'cache-control': 'no-cache',
+   'content-type': 'application/json;charset=UTF-8',
+   'origin': 'https://www.irvinecompanyapartments.com',
+   'pragma': 'no-cache',
+   'referer': 'https://www.irvinecompanyapartments.com/',
+   'sec-ch-ua': '".Not/A)Brand";v="99", "Google Chrome";v="103", "Chromium";v="103"',
+   'sec-ch-ua-mobile': '?0',
+   'sec-ch-ua-platform': '"macOS"',
+   'sec-fetch-dest': 'empty',
+   'sec-fetch-mode': 'cors',
+   'sec-fetch-site': 'same-site',
+   'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36',
+   'x-referer': 'https://www.irvinecompanyapartments.com/locations/northern-california/redwood-city/franklin-st/availability.html'}
+
 
 def alert(text):
     # play sound
     # send e-mail
-    # play_sound()
+    play_sound()
     send_email("AptMonitor Alert", text, EMAIL_ALERT_ADDRESS)
 
 
@@ -80,6 +120,7 @@ class StrategySCSMinPrice(Strategy):
     def check(self):
         print("Min Price: {}".format(self.min))
         if self.min < SCS_ALERT_PRICE:
+            print("Santa Clara Square min price: {} < {}".format(self.min, SCS_ALERT_PRICE))
             alert("Santa Clara Square min price: {} < {}".format(self.min, SCS_ALERT_PRICE))
 
 
@@ -94,7 +135,64 @@ class StrategySCSStudioAvailability(Strategy):
     def check(self):
         print("Studio: {}".format(self.hasStudio))
         if self.hasStudio:
+            print("Santa Clara Square studio is available")
             alert("Santa Clara Square studio is available")
+
+class StrategyMonticelloMinPrice(Strategy):
+    def __init__(self):
+        self.min = 5000
+
+    def execute(self, obj11):
+        self.min = min(self.min, obj11["unitStartingPrice"]["price"])
+
+    def check(self):
+        print("Min Price: {}".format(self.min))
+        if self.min < MONTICELLO_ALERT_PRICE:
+            print("Monticello min price: {} < {}".format(self.min, MONTICELLO_ALERT_PRICE))
+            alert("Monticello min price: {} < {}".format(self.min, MONTICELLO_ALERT_PRICE))
+
+
+class StrategyMonticelloStudioAvailability(Strategy):
+    def __init__(self):
+        self.hasStudio = False
+
+    def execute(self, obj11):
+        self.hasStudio = self.hasStudio or obj11["unitIsStudio"]
+        # print("=====studio Available=====")
+
+    def check(self):
+        print("Studio: {}".format(self.hasStudio))
+        if self.hasStudio:
+            print("FranklinStreet studio is available")
+            alert("FranklinStreet studio is available")
+
+class StrategyFranklinStreetMinPrice(Strategy):
+    def __init__(self):
+        self.min = 5000
+
+    def execute(self, obj11):
+        self.min = min(self.min, obj11["unitStartingPrice"]["price"])
+
+    def check(self):
+        print("Min Price: {}".format(self.min))
+        if self.min < FranklinStreet_ALERT_PRICE:
+            print("FranklinStreet min price: {} < {}".format(self.min, FranklinStreet_ALERT_PRICE))
+            alert("FranklinStreet min price: {} < {}".format(self.min, FranklinStreet_ALERT_PRICE))
+
+
+class StrategyFranklinStreetStudioAvailability(Strategy):
+    def __init__(self):
+        self.hasStudio = False
+
+    def execute(self, obj11):
+        self.hasStudio = self.hasStudio or obj11["unitIsStudio"]
+        # print("=====studio Available=====")
+
+    def check(self):
+        print("Studio: {}".format(self.hasStudio))
+        if self.hasStudio:
+            print("FranklinStreet studio is available")
+            alert("FranklinStreet studio is available")
 
 
 class StrategyLynhavenMinPrice(Strategy):
@@ -107,26 +205,33 @@ class StrategyLynhavenMinPrice(Strategy):
     def check(self):
         print("Min Price: {}".format(self.min))
         if self.min < LYNHAVEN_ALERT_PRICE:
+            print("Lynhaven min price: {} < {}".format(self.min, SCS_ALERT_PRICE))
             alert("Lynhaven min price: {} < {}".format(self.min, SCS_ALERT_PRICE))
 
 
 class StrategyLynhavenNew1B1BAvailable(Strategy):
     def __init__(self):
-        self.prevNum1B1B = 0
+        self.prevNum1B1B = -1
         self.num1B1B = 0
 
     def execute(self, obj11):
         bed = obj11["bedroom"]
         bath = obj11["bathroom"]
-        if bed == "1" and bath == "1":
+        floor = obj11["floor"]
+        price = obj11["min_rent"]
+        if bed == "1" and bath == "1" and floor != "1" and price < 3800:
             self.num1B1B += 1
 
     def check(self):
         print("num 1B1B: {}".format(self.num1B1B))
-        if self.num1B1B != self.prevNum1B1B:
-            alert("Lynhaven new 1b1b is available, prev number: {}, now number: {}".format(self.prevNum1B1B, self.num1B1B))
+        if self.num1B1B != self.prevNum1B1B and self.prevNum1B1B != -1:
+            print("Lynhaven new 1b1b is available, prev number: {}, now number: {}".format(self.prevNum1B1B,
+                                                                                           self.num1B1B))
+            alert("Lynhaven new 1b1b is available, prev number: {}, now number: {}".format(self.prevNum1B1B,
+                                                                                           self.num1B1B))
         self.prevNum1B1B = self.num1B1B
         self.num1B1B = 0
+
 
 
 class AptMonitor:
@@ -146,6 +251,48 @@ class SCSAptMonitor(AptMonitor):
         resp = r.json()
         print()
         print("Santa Clara Square Monitor: {} HTTP Status: {}".format(datetime.now(), r.status_code))
+
+        for obj in resp["results"]:
+            for obj1 in obj["hits"]:
+                for strategy in self.strategyList:
+                    strategy.execute(obj1)
+
+        for strategy in self.strategyList:
+            strategy.check()
+
+class MonticelloAptMonitor(AptMonitor):
+    def __init__(self, url, payload, headers, strategyList):
+        self.url = url
+        self.payload = payload
+        self.headers = headers
+        self.strategyList = strategyList
+
+    def runOnce(self):
+        r = requests.post(self.url, data=self.payload, headers=self.headers)
+        resp = r.json()
+        print()
+        print("Monticello Monitor: {} HTTP Status: {}".format(datetime.now(), r.status_code))
+
+        for obj in resp["results"]:
+            for obj1 in obj["hits"]:
+                for strategy in self.strategyList:
+                    strategy.execute(obj1)
+
+        for strategy in self.strategyList:
+            strategy.check()
+
+class FranklinStreetAptMonitor(AptMonitor):
+    def __init__(self, url, payload, headers, strategyList):
+        self.url = url
+        self.payload = payload
+        self.headers = headers
+        self.strategyList = strategyList
+
+    def runOnce(self):
+        r = requests.post(self.url, data=self.payload, headers=self.headers)
+        resp = r.json()
+        print()
+        print("FranklinStreet Monitor: {} HTTP Status: {}".format(datetime.now(), r.status_code))
 
         for obj in resp["results"]:
             for obj1 in obj["hits"]:
@@ -180,12 +327,25 @@ class LynhavenAptMonitor(AptMonitor):
 scsStrategyList = [StrategySCSMinPrice(), StrategySCSStudioAvailability()]
 scsMonitor = SCSAptMonitor(scs_url, scs_payload, scs_headers, scsStrategyList)
 
+monticelloStrategyList = [
+    StrategyMonticelloMinPrice(),
+    # StrategyMonticelloStudioAvailability()
+]
+monticelloMonitor = MonticelloAptMonitor(monticello_url, monticello_payload, monticello_headers, monticelloStrategyList)
+
+franklinStreetStrategyList = [StrategyFranklinStreetMinPrice(), StrategyFranklinStreetStudioAvailability()]
+franklinStreetAptMonitor = FranklinStreetAptMonitor(franklinStreet_url, franklinStreet_payload, franklinStreet_headers, franklinStreetStrategyList)
+
 lynhavenStrategyList = [StrategyLynhavenMinPrice(), StrategyLynhavenNew1B1BAvailable()]
 lynhavenMonitor = LynhavenAptMonitor(lynhaven_url, lynhaven_payload, lynhaven_headers, lynhavenStrategyList)
 
+
+
 monitorList = [
     scsMonitor,
-    lynhavenMonitor
+    monticelloMonitor,
+    lynhavenMonitor,
+    franklinStreetAptMonitor,
 ]
 
 while True:
