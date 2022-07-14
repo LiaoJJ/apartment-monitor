@@ -3,6 +3,7 @@ from datetime import datetime
 from abc import abstractmethod, ABC
 import threading
 import requests
+import json
 from play_sound import play_sound
 from send_an_email import send_email
 
@@ -10,8 +11,9 @@ from send_an_email import send_email
 FranklinStreet_ALERT_PRICE = 3200
 MONTICELLO_ALERT_PRICE = 3300
 SCS_ALERT_PRICE = 3300
+AntonMenlo_ALERT_PRICE = 3300
 LYNHAVEN_ALERT_PRICE = 3100
-EMAIL_ALERT_ADDRESS = "XXXX@gmail.com"
+EMAIL_ALERT_ADDRESS = "XX@gmail.com"
 INTERVAL_TIME = 1800
 
 # HTTP Setting
@@ -92,6 +94,24 @@ franklinStreet_headers = {   'authority': 'search.irvinecompanyapartments.com',
    'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36',
    'x-referer': 'https://www.irvinecompanyapartments.com/locations/northern-california/redwood-city/franklin-st/availability.html'}
 
+antonmenlo_url = 'https://www.antonmenlo.com/CmsSiteManager/callback.aspx?act=Proxy/GetUnits&available=true&honordisplayorder=true&siteid=7571400&leaseterm=12&dateneeded=2022-07-14&callback=jQuery224042186683290351024_1657840206655&_=1657840206656'
+antonmenlo_payload =   { 'authority': 'www.antonmenlo.com',
+   'accept': 'text/javascript, application/javascript, application/ecmascript, application/x-ecmascript, */*; q=0.01',
+   'accept-language': 'en-US,en;q=0.9,zh;q=0.8,zh-CN;q=0.7',
+   'cache-control': 'no-cache',
+   'cookie': '_ga=GA1.2.522243094.1653028028; _gcl_au=1.1.1333231488.1653028028; rpTrackingExternalUserId=b42523ef-bbac-4ddf-97cc-d51e27105ac8; _gid=GA1.2.93603605.1657821674; __utmc=111291348; __utma=111291348.522243094.1653028028.1657835916.1657840044.11; __utmz=111291348.1657840044.11.11.utmcsr=google|utmccn=(organic)|utmcmd=organic|utmctr=(not%20provided); __utmt=1; rpTrackingFirstPartyUserObj=%7B%22id%22%3A%22745b7564-e3bd-40be-9f00-80a32df42bcc%22%2C%22hit%22%3A24%7D; TS0148fe2d=01c7a403d7961752ec59dbcc9e482bc2193cef19b9e45ee5a02431372d33ec0489b160d5291fc889c3600d3d093273579406aaca85035786fdbde58e167507c03f0a7719b1ffffdf64d7055183065720bf2af62a9b50c231b68d05d753cb6b06b2df9227dd2cf00c24309f580f23aa128100da3e36b8a938d408268ec102cdcd0450db1bc8; _gat=1; _gat_gtag_UA_133244202_1=1; __utmb=111291348.2.10.1657840044',
+   'pragma': 'no-cache',
+   'referer': 'https://www.antonmenlo.com/',
+   'sec-ch-ua': '".Not/A)Brand";v="99", "Google Chrome";v="103", "Chromium";v="103"',
+   'sec-ch-ua-mobile': '?0',
+   'sec-ch-ua-platform': '"macOS"',
+   'sec-fetch-dest': 'empty',
+   'sec-fetch-mode': 'cors',
+   'sec-fetch-site': 'same-origin',
+   'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36',
+   'x-requested-with': 'XMLHttpRequest',}
+antonmenlo_headers = None
+
 
 def alert(text):
     # play sound
@@ -166,6 +186,26 @@ class StrategyMonticelloStudioAvailability(Strategy):
             print("FranklinStreet studio is available")
             alert("FranklinStreet studio is available")
 
+class StrategyMonticelloStudioNum(Strategy):
+    def __init__(self):
+        self.prevNumStudio = -1
+        self.numStudio = 0
+
+    def execute(self, obj11):
+        if obj11["unitIsStudio"]:
+            self.numStudio += 1
+        # print("=====studio Available=====")
+
+    def check(self):
+        print("num 1B1B: {}".format(self.numStudio))
+        if self.numStudio != self.prevNumStudio and self.prevNumStudio != -1:
+            print("Monticello new 1b1b is available, prev number: {}, now number: {}".format(self.prevNumStudio,
+                                                                                           self.numStudio))
+            alert("Monticello new 1b1b is available, prev number: {}, now number: {}".format(self.prevNumStudio,
+                                                                                           self.numStudio))
+        self.prevNumStudio = self.numStudio
+        self.numStudio = 0
+
 class StrategyFranklinStreetMinPrice(Strategy):
     def __init__(self):
         self.min = 5000
@@ -231,6 +271,35 @@ class StrategyLynhavenNew1B1BAvailable(Strategy):
                                                                                            self.num1B1B))
         self.prevNum1B1B = self.num1B1B
         self.num1B1B = 0
+
+class StrategyAntonMenloMinPrice(Strategy):
+    def __init__(self):
+        self.min = 5000
+
+    def execute(self, obj11):
+        self.min = min(self.min, obj11["rent"])
+
+    def check(self):
+        print("Min Price: {}".format(self.min))
+        if self.min < AntonMenlo_ALERT_PRICE:
+            print("AntonMenlo min price: {} < {}".format(self.min, AntonMenlo_ALERT_PRICE))
+            alert("AntonMenlo min price: {} < {}".format(self.min, AntonMenlo_ALERT_PRICE))
+
+
+class StrategyAntonMenloStudioAvailability(Strategy):
+    def __init__(self):
+        self.hasStudio = False
+
+    def execute(self, obj11):
+        isThisStudio = obj11['numberOfBeds'] == 0 and obj11['numberOfBaths'] == 1.0
+        self.hasStudio = self.hasStudio or isThisStudio
+        # print("=====studio Available=====")
+
+    def check(self):
+        print("Studio: {}".format(self.hasStudio))
+        if self.hasStudio:
+            print("AntonMenlo studio is available")
+            alert("AntonMenlo studio is available")
 
 
 
@@ -323,6 +392,29 @@ class LynhavenAptMonitor(AptMonitor):
         for strategy in self.strategyList:
             strategy.check()
 
+class AntonMenloAptMonitor(AptMonitor):
+    def __init__(self, url, payload, headers, strategyList):
+        self.url = url
+        self.payload = payload
+        self.headers = headers
+        self.strategyList = strategyList
+
+    def runOnce(self):
+        r = requests.post(self.url, data=self.payload, headers=self.headers)
+        text = r.text
+        idx = text.find('(')
+        json_str = text[idx+1: -1]
+        json_obj = json.loads(json_str)
+        # print(json_obj)
+
+        print("AntonMenlo Monitor: {} HTTP Status: {}".format(datetime.now(), r.status_code))
+        for obj in json_obj["units"]:
+            for strategy in self.strategyList:
+                strategy.execute(obj)
+
+        for strategy in self.strategyList:
+            strategy.check()
+
 
 scsStrategyList = [StrategySCSMinPrice(), StrategySCSStudioAvailability()]
 scsMonitor = SCSAptMonitor(scs_url, scs_payload, scs_headers, scsStrategyList)
@@ -330,6 +422,7 @@ scsMonitor = SCSAptMonitor(scs_url, scs_payload, scs_headers, scsStrategyList)
 monticelloStrategyList = [
     StrategyMonticelloMinPrice(),
     # StrategyMonticelloStudioAvailability()
+    StrategyMonticelloStudioNum(),
 ]
 monticelloMonitor = MonticelloAptMonitor(monticello_url, monticello_payload, monticello_headers, monticelloStrategyList)
 
@@ -339,6 +432,8 @@ franklinStreetAptMonitor = FranklinStreetAptMonitor(franklinStreet_url, franklin
 lynhavenStrategyList = [StrategyLynhavenMinPrice(), StrategyLynhavenNew1B1BAvailable()]
 lynhavenMonitor = LynhavenAptMonitor(lynhaven_url, lynhaven_payload, lynhaven_headers, lynhavenStrategyList)
 
+antonmenloStrategyList = [StrategyAntonMenloMinPrice(), StrategyAntonMenloStudioAvailability()]
+antonmenloAptMonitor = AntonMenloAptMonitor(antonmenlo_url, antonmenlo_payload, antonmenlo_headers, antonmenloStrategyList)
 
 
 monitorList = [
@@ -346,6 +441,7 @@ monitorList = [
     monticelloMonitor,
     lynhavenMonitor,
     franklinStreetAptMonitor,
+    antonmenloAptMonitor,
 ]
 
 while True:

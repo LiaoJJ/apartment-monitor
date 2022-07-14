@@ -21,6 +21,12 @@ Recently, I am looking for an apartment in Bay Area, but it proves the apartment
 - Python
 - HTTP request
 
+## Supported Apartments
+- Santa Clara Square Apartment
+- Monticello Apartment
+- Lynhaven Apartment
+- Franklin Street Apartment
+- Anton Menlo Apartment
 
 
 running example:

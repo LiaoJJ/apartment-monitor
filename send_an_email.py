@@ -7,7 +7,7 @@ def send_email(subject, text, receiver):
     TO = receiver
 
     # Gmail Sign In
-    gmail_sender = 'XXX@gmail.com'
+    gmail_sender = 'XX@gmail.com'
     gmail_passwd = 'XX'
     try:
 
